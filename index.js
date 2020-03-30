@@ -5,15 +5,24 @@ var comitTypes = require('./types');
 var configLoader = require('commitizen').configLoader;
 
 var config = configLoader.load();
+
+var externalDefaultOptions = {
+  defaultType: 'NFF',
+  defaultScope: "",        
+  defaultSubject: "",
+  defaultBody: "",
+  defaultIssues: ""
+};
+
 var options = {
   types: comitTypes.types,
-  defaultType: process.env.CZ_TYPE || config.defaultType,
-  defaultScope: process.env.CZ_SCOPE || config.defaultScope,
-  defaultSubject: process.env.CZ_SUBJECT || config.defaultSubject,
-  defaultBody: process.env.CZ_BODY || config.defaultBody,
-  defaultIssues: process.env.CZ_ISSUES || config.defaultIssues,
+  defaultType: process.env.CZ_TYPE || config.defaultType || externalDefaultOptions.defaultType,
+  defaultScope: process.env.CZ_SCOPE || config.defaultScope || externalDefaultOptions.defaultScope,
+  defaultSubject: process.env.CZ_SUBJECT || config.defaultSubject || externalDefaultOptions.defaultSubject,
+  defaultBody: process.env.CZ_BODY || config.defaultBody || externalDefaultOptions.defaultBody,
+  defaultIssues: process.env.CZ_ISSUES || config.defaultIssues || externalDefaultOptions.defaultIssues,
   disableScopeLowerCase:
-    process.env.DISABLE_SCOPE_LOWERCASE || config.disableScopeLowerCase,
+    process.env.DISABLE_SCOPE_LOWERCASE || config.disableScopeLowerCase || externalDefaultOptions.disableScopeLowerCase,
   maxHeaderWidth:
     (process.env.CZ_MAX_HEADER_WIDTH &&
       parseInt(process.env.CZ_MAX_HEADER_WIDTH)) ||
