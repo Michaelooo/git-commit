@@ -79,8 +79,7 @@ module.exports = function(options) {
         {
           type: 'input',
           name: 'subject',
-          message:
-            '请用简短的陈述描述本次提交，建议使用中文，务必 UTF-8 编码。',
+          message: '请用简短的陈述描述本次提交，建议使用中文，务必 UTF-8 编码。',
           default: options.defaultScope,
           filter: function(value) {
             return options.disableScopeLowerCase
