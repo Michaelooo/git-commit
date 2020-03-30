@@ -1,6 +1,6 @@
 {
-  "name": "git-commit",
-  "version": "0.0.1",
+  "name": "simple-git-commit",
+  "version": "0.0.2",
   "description": "commitizen adapter",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,10 @@
   "keywords": [
     "commitizen"
   ],
-  "homepage": "https://github.com/commitizen/cz-conventional-changelog",
+  "homepage": "https://github.com/Michaelooo/git-commit",
   "repository": {
     "type": "git",
-    "url": "https://github.com/commitizen/cz-conventional-changelog.git"
+    "url": "https://github.com/Michaelooo/git-commit.git"
   },
   "engineStrict": true,
   "engines": {
