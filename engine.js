@@ -1,10 +1,10 @@
-'format cjs';
+"format cjs";
 
-var wrap = require('word-wrap');
-var map = require('lodash.map');
-var longest = require('longest');
-var rightPad = require('right-pad');
-var chalk = require('chalk');
+var wrap = require("word-wrap");
+var map = require("lodash.map");
+var longest = require("longest");
+var rightPad = require("right-pad");
+var chalk = require("chalk");
 
 var filter = function(array) {
   return array.filter(function(x) {
@@ -28,7 +28,7 @@ var filterSubject = function(subject) {
     subject =
       subject.charAt(0).toLowerCase() + subject.slice(1, subject.length);
   }
-  while (subject.endsWith('.')) {
+  while (subject.endsWith(".")) {
     subject = subject.slice(0, subject.length - 1);
   }
   return subject;
@@ -43,7 +43,7 @@ module.exports = function(options) {
   var length = longest(Object.keys(types)).length + 1;
   var choices = map(types, function(type, key) {
     return {
-      name: rightPad(key + ':', length) + ' ' + type.description,
+      name: rightPad(key + ":", length) + " " + type.description,
       value: key
     };
   });
@@ -70,51 +70,52 @@ module.exports = function(options) {
       // collection library if you prefer.
       cz.prompt([
         {
-          type: 'list',
-          name: 'type',
+          type: "list",
+          name: "type",
           message: "请选择你本次提交的内容:",
           choices: choices,
           default: options.defaultType
         },
         {
-          type: 'input',
-          name: 'subject',
-          message: '请用简短的陈述描述本次提交，建议使用中文，务必 UTF-8 编码。',
+          type: "input",
+          name: "subject",
+          message:
+            "请用简短的陈述描述本次提交，建议使用中文，务必 UTF-8 编码。",
           default: options.defaultScope,
           filter: function(value) {
             return options.disableScopeLowerCase
               ? value.trim()
               : value.trim().toLowerCase();
           }
-        },
+        }
       ]).then(function(answers) {
         var wrapOptions = {
           trim: true,
           cut: false,
-          newline: '\n',
-          indent: '',
+          newline: "\n",
+          indent: "",
           width: options.maxLineWidth
         };
 
         // parentheses are only needed when a scope is present
-        var scope = answers.scope ? '(' + answers.scope + ')' : '';
+        var scope = answers.scope ? "(" + answers.scope + ")" : "";
 
         // Hard limit this line in the validate
-        var head = '[' + answers.type + ']' + scope + ': ' + answers.subject;
+        var head = "[" + answers.type + "]" + scope + ": " + answers.subject;
 
         // Wrap these lines at options.maxLineWidth characters
         var body = answers.body ? wrap(answers.body, wrapOptions) : false;
 
         // Apply breaking change prefix, removing it if already present
-        var breaking = answers.breaking ? answers.breaking.trim() : '';
+        var breaking = answers.breaking ? answers.breaking.trim() : "";
         breaking = breaking
-          ? 'BREAKING CHANGE: ' + breaking.replace(/^BREAKING CHANGE: /, '')
-          : '';
+          ? "BREAKING CHANGE: " + breaking.replace(/^BREAKING CHANGE: /, "")
+          : "";
         breaking = breaking ? wrap(breaking, wrapOptions) : false;
 
         var issues = answers.issues ? wrap(answers.issues, wrapOptions) : false;
 
-        commit(filter([head, body, breaking, issues]).join('\n\n'));
+        commit(filter([head, body, breaking, issues]).join("\n\n"));
       });
     }
   };

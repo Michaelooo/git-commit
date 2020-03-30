@@ -4,7 +4,10 @@
   "description": "commitizen adapter",
   "main": "index.js",
   "scripts": {
-    "test": "mocha *.test.js"
+    "commit": "git-cz",
+    "test": "mocha *.test.js",
+    "format": "prettier --write *.js",
+    "semantic-release": "semantic-release"
   },
   "keywords": [
     "commitizen"
